@@ -3,7 +3,7 @@
 const BaseScraper = require("../helpers/BaseScraper");
 
 /**
- * Class for scraping foodnetwork.com
+ * Class for scraping TheCafeSucrefarineScraper.com
  * @extends BaseScraper
  */
 class TheCafeSucrefarineScraper extends BaseScraper {
