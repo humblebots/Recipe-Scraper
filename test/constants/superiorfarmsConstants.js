@@ -1,0 +1,42 @@
+module.exports = {
+  testUrl: "https://superiorfarms.com/recipe/adobo-crusted-lamb-loin-chops/",
+  invalidUrl: "https://superiorfarms.com/not_real",
+  invalidDomainUrl: "www.invalid.com",
+  nonRecipeUrl: "https://superiorfarms.com/our-story/",
+  expectedRecipe: {
+    name: "Adobo-Crusted Lamb Loin Chops",
+    ingredients: [
+      "1 tbsp fennel seed",
+      "1 tbsp cumin seed",
+      "2 tsp coriander seed",
+      "2 tsp cracked pepper",
+      "1 1/2 tsp kosher salt",
+      "2 tsp minced garlic cloves",
+      "2 tsp fresh oregano leaves",
+      "2 tsp lime zest",
+      "1/2 tsp fresh thyme",
+      "1/2 tsp fresh rosemary",
+      "8 (1-inch thick) American lamb loin chops",
+      "1/4 cup extra-virgin olive oil",
+    ],
+    instructions: [
+      "In a dry skillet, toast the fennel, cumin, coriander, and pepper for a few minutes until aromatic. Let the spices cool and then grind them coarsely in a spice grinder or blender.",
+      "Transfer the ground spice mixture to a bowl and stir in the salt, garlic, oregano, and lime zest. Add the thyme and rosemary. Rub both sides of each lamb chop with about one tablespoon of the spice mixture; cover and marinate the chops for at least 1 hour. (If marinating in the refrigerator, remove the lamb from the refrigerator 30 minutes before cooking.)",
+      "Preheat the oven to 400ºF.",
+      "Heat a large, ovenproof skillet over medium-high heat. Add 2 tablespoons of olive oil, heating it until it shimmers. Place the lamb chops in the hot pan and sear them for 3 minutes per side. (You might have to do this in batches or use two pans.)",
+      "Place the pan(s) into the oven and roast for 5 to 10 minutes or until the lamb is cooked to desired doneness. Remove the pan(s) from the oven, remove the lamb chops, and let them rest for 5 minutes before serving.",
+    ],
+    tags: ["Lamb Loin", "American"],
+    time: {
+      prep: "20 mins",
+      cook: "25 mins",
+      active: "",
+      inactive: "",
+      ready: "",
+      total: "",
+    },
+    servings: "4",
+    image:
+      "https://superiorfarms.com/wp-content/uploads/2016/02/Adodo_Crusted_Lamb_Loin_Chops1.jpg",
+  },
+};
