@@ -38,13 +38,14 @@ const domains = {
   tastesbetterfromscratch: require("../scrapers/TastesBetterFromScratchScraper"),
   tasteofhome: require("../scrapers/TasteOfHomeScraper"),
   theblackpeppercorn: require("../scrapers/TheBlackPeppercornScraper"),
+  thecafesucrefarine: require("../scrapers/TheCafeSucrefarineScraper"),
   thepioneerwoman: require("../scrapers/ThePioneerWomanScraper"),
   therecipecritic: require("../scrapers/TheRecipeCriticScraper"),
   therealfoodrds: require("../scrapers/TheRealFoodDrsScraper"),
   thespruceeats: require("../scrapers/TheSpruceEatsScraper"),
   whatsgabycooking: require("../scrapers/WhatsGabyCookingScraper"),
   woolworths: require("../scrapers/WoolworthsScraper"),
-  yummly: require("../scrapers/YummlyScraper")
+  yummly: require("../scrapers/YummlyScraper"),
 };
 
 /**
