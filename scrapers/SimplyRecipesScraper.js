@@ -14,39 +14,54 @@ class SimplyRecipesScraper extends BaseScraper {
   scrape($) {
     this.defaultSetImage($);
     const { ingredients, instructions, time } = this.recipe;
-    this.recipe.name = $(".recipe-callout")
-      .children("h2")
-      .text();
+    this.recipe.name = $("span.recipe-block__header")
+      .text()
+      .replace(/\s\s+/g, " ")
+      .trim();
 
-    $(".recipe-ingredients")
-      .find("li.ingredient, p")
+    $(".ingredient-list")
+      .find("li.ingredient")
       .each((i, el) => {
-        ingredients.push($(el).text());
+        ingredients.push(
+          $(el)
+            .clone()
+            .children()
+            .remove()
+            .end()
+            .text()
+            .replace(/\s\s+/g, " ")
+            .trim()
+        );
       });
 
-    $(".instructions")
+    $("section.section--instructions")
       .find("p")
       .each((i, el) => {
         let curEl = $(el).text();
         if (curEl) {
-          instructions.push(curEl.replace(/^\d+\s/, ""));
+          instructions.push(curEl.replace(/^\d+\s/, "").trim());
         }
       });
 
-    let tagsSet = new Set();
-    $(".taxonomy-term").each((i, el) => {
-      tagsSet.add(
-        $(el)
-          .find("span")
-          .text()
-      );
-    });
-    this.recipe.tags = Array.from(tagsSet);
+    time.prep = $("div.prep-time span span.meta-text__data")
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
 
-    time.prep = $(".preptime").text();
-    time.cook = $(".cooktime").text();
+    time.cook = $("div.cook-time span span.meta-text__data")
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
 
-    this.recipe.servings = $(".yield").text();
+    time.total = $("div.total-time span span.meta-text__data")
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
+
+    this.recipe.servings = $("div.recipe-serving span span.meta-text__data")
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
   }
 }
 
