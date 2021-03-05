@@ -1,0 +1,48 @@
+module.exports = {
+  testUrl:
+    "https://thereislifeafterwheat.com/2014/10/sandwich-bread-2/?fbclid=iwar20kih966lajfk5onocbmu1lga1tziwjmnrqjuqkux-axe8_ixc63fqchg",
+  invalidUrl: "https://thereislifeafterwheat.com/not_real",
+  invalidDomainUrl: "www.invalid.com",
+  nonRecipeUrl: "https://thereislifeafterwheat.com/about/",
+  expectedRecipe: {
+    name: "Gluten Free Bread",
+    ingredients: [
+      "3 cups High quality gluten free flour blend (my favorite is gf Jules)",
+      "1 T gluten free instant yeast",
+      "2 T gluten free potato flakes (instant potatoes)",
+      "1 tsp salt",
+      "1/2 cup instant dry milk powder (see notes for dairy free)",
+      "2 T sugar or honey",
+      "1 egg, room temp",
+      "1 3/4 cup water, just warmer than room temp",
+      "1 T butter, softened (see notes for dairy free)",
+    ],
+    instructions: [
+      "Measure flour by stirring the flour, scooping into measuring cup, and leveling with the flat end of a knife. Add all ingredients to bowl of stand mixer (you can also use a hand mixer) in order listed.",
+      "Mix on medium speed for 3 minutes. It should be the consistency of a thick and sticky batter, like a banana bread that has too much flour. Add additional water or flour 1 T at a time if needed to attain this consistency. Refer to the photos in the post to see what the consistency should look like.",
+      "Grease bottom and corners of a loaf pan. I use butter.",
+      "Spread batter in loaf pan, peaking the middle a bit lengthwise instead of spreading flat.",
+      "Cover lightly with plastic wrap sprayed with cooking spray or oil and let rise in a warm place until loaf has almost doubled in size. I use the rapid proof option on my oven and it takes about 25 minutes.",
+      "Preheat to 350°.",
+      "Bake for 45-50 minutes, until bread looks firm and is a nice deep golden brown on top. If you take it out too early, it will fall as it is cooling.",
+      "Brush the top with butter.",
+      "Let cool for 10 minutes in pan before removing to wire rack.",
+      "Let cool completely before slicing.",
+      "Be sure to enjoy it fresh! It is best this way.",
+      "The best way to store gluten free bread is to slice, place in a Ziploc freezer bag, remove all the air, seal, and freeze. You can then remove a slice and pop it in the toaster or microwave as you need. It might help to put pieces of wax or parchment paper between the slices so they don't stick together.",
+      "Once you have frozen the bread, it's best toasted or warmed in the microwave for 10-15 seconds. I don't recommend refrigeration as the bread tends to crumble easily.",
+    ],
+    tags: [],
+    time: {
+      prep: "15 minutes",
+      cook: "45 minutes",
+      active: "",
+      inactive: "",
+      ready: "",
+      total: "2 hours",
+    },
+    servings: "1",
+    image:
+      "https://thereislifeafterwheat.com/wp-content/uploads/2014/10/Gluten-Free-sandwich-bread-9.jpg",
+  },
+};
