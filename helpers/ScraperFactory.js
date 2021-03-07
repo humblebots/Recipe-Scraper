@@ -26,6 +26,7 @@ const domains = {
   insidetherustickitchen: require("../scrapers/InsideTheRusticKitchenScraper"),
   julieblanner: require("../scrapers/JulieBlannerScraper"),
   kitchenstories: require("../scrapers/KitchenStoriesScraper"),
+  loveandlemons: require("../scrapers/LoveAndLemonsScaper"),
   makingthymeforhealth: require("../scrapers/MakingThymeForHealthScraper"),
   melskitchencafe: require("../scrapers/MelsKitchenCafeScraper"),
   minimalistbaker: require("../scrapers/MinimalistBakerScraper"),
