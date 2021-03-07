@@ -20,6 +20,7 @@ const domains = {
   epicurious: require("../scrapers/EpicuriousScraper"),
   food: require("../scrapers/FoodScraper"),
   foodandwine: require("../scrapers/FoodAndWineScraper"),
+  foodal: require("../scrapers/FoodalScaper"),
   foodnetwork: require("../scrapers/FoodNetworkScraper"),
   gimmedelicious: require("../scrapers/GimmeDeliciousScraper"),
   gimmesomeoven: require("../scrapers/GimmeSomeOvenScraper"),
