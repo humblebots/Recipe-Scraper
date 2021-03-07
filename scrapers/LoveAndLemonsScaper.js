@@ -6,7 +6,7 @@ const BaseScraper = require("../helpers/BaseScraper");
  * Class for scraping loveandlemons.com
  * @extends BaseScraper
  */
-class JulieBlannerScraper extends BaseScraper {
+class LoveAndLemonsScraper extends BaseScraper {
   constructor(url) {
     super(url, "loveandlemons.com/");
   }
@@ -34,9 +34,7 @@ class JulieBlannerScraper extends BaseScraper {
     time.inactive = $(".wprm-recipe-custom-time-label").next().text();
     time.total = $(".wprm-recipe-total-time-label").next().text();
     this.recipe.servings = $(".wprm-recipe-servings").text();
-
-    console.log(JSON.stringify(this.recipe, null, 2));
   }
 }
 
-module.exports = JulieBlannerScraper;
+module.exports = LoveAndLemonsScraper;
