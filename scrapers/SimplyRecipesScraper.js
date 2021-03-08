@@ -14,7 +14,7 @@ class SimplyRecipesScraper extends BaseScraper {
   scrape($) {
     this.defaultSetImage($);
     const { ingredients, instructions, time } = this.recipe;
-    this.recipe.name = $("span.recipe-block__header")
+    this.recipe.name = $("h2.recipe-block__header")
       .text()
       .replace(/\s\s+/g, " ")
       .trim();
@@ -62,6 +62,8 @@ class SimplyRecipesScraper extends BaseScraper {
       .text()
       .replace(/\s+/g, " ")
       .trim();
+
+    console.log(JSON.stringify(this.recipe, null, 2));
   }
 }
 
