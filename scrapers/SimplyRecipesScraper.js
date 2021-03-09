@@ -62,8 +62,6 @@ class SimplyRecipesScraper extends BaseScraper {
       .text()
       .replace(/\s+/g, " ")
       .trim();
-
-    console.log(JSON.stringify(this.recipe, null, 2));
   }
 }
 
