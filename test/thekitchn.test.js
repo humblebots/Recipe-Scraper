@@ -18,7 +18,7 @@ const constants = {
       "Lock the lid on and make sure the pressure valve is set to seal. Set to cook under HIGH pressure for 15 minutes. It will take about 15 minutes to come up to pressure.",
       "When the cook time is up, let the pressure naturally release for 5 minutes. Quick release any remaining pressure. Use 2 forks to shred the meat in the pressure cooker, then stir into the sauce.",
     ],
-    tags: [],
+    tags: [""],
     time: {
       prep: "5 minutes",
       cook: "35 minutes",

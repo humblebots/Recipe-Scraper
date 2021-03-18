@@ -11,9 +11,10 @@ const recipeSchema = require("./RecipeSchema.json");
  * Abstract Class which all scrapers inherit from
  */
 class BaseScraper {
-  constructor(url, subUrl = "") {
+  constructor(url, subUrl = "", fetchOptions = {}) {
     this.url = url;
     this.subUrl = subUrl;
+    this.fetchOptions = fetchOptions;
   }
 
   /**
@@ -53,7 +54,7 @@ class BaseScraper {
    */
   async fetchDOMModel() {
     try {
-      const res = await fetch(this.url);
+      const res = await fetch(this.url, this.fetchOptions);
       const html = await res.text();
       return cheerio.load(html);
     } catch (err) {
