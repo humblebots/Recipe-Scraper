@@ -67,8 +67,6 @@ class TheKitchnScraper extends BaseScraper {
       .map((keyword) => {
         return keyword.replace(/\s\s+/g, " ").trim();
       });
-
-    console.log(JSON.stringify(this.recipe, null, 2));
   }
 }
 
