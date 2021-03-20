@@ -24,6 +24,7 @@ const domains = {
   foodnetwork: require("../scrapers/FoodNetworkScraper"),
   gimmedelicious: require("../scrapers/GimmeDeliciousScraper"),
   gimmesomeoven: require("../scrapers/GimmeSomeOvenScraper"),
+  hadiaslebanesecuisine: require("../scrapers/HadiasLebaneseCuisineScraper"),
   insidetherustickitchen: require("../scrapers/InsideTheRusticKitchenScraper"),
   julieblanner: require("../scrapers/JulieBlannerScraper"),
   kitchenstories: require("../scrapers/KitchenStoriesScraper"),
