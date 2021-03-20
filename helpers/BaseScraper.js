@@ -48,6 +48,10 @@ class BaseScraper {
       $("meta[itemprop='image']").attr("content");
   }
 
+  defaultSetTitle($) {
+    this.recipe.name = $("meta[property='og:title']").attr("content");
+  }
+
   /**
    * Fetches html from url
    * @returns {object} - Cheerio instance
