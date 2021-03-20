@@ -15,22 +15,21 @@ class HadiasLebaneseCuisineScraper extends BaseScraper {
     this.defaultSetImage($);
     const { ingredients, instructions, tags, time } = this.recipe;
 
-    // this.recipe.name = $(".tasty-recipes-header-content")
-    //   .children("h2")
-    //   .first()
-    //   .text();
+    this.recipe.name = $("h1.title").text().replace(/\s+/g, " ").trim();
 
-    // $(".tasty-recipes-ingredients")
-    //   .find("li")
-    //   .each((i, el) => {
-    //     ingredients.push($(el).text());
-    //   });
+    $('h2:contains("Ingredients")')
+      .next("ul")
+      .find("li")
+      .each((_, el) => {
+        ingredients.push($(el).text().replace(/\s+/g, " ").trim());
+      });
 
-    // $(".tasty-recipes-instructions")
-    //   .find("li")
-    //   .each((i, el) => {
-    //     instructions.push($(el).text());
-    //   });
+    $('h2:contains("Directions")')
+      .next("ol")
+      .find("li")
+      .each((_, el) => {
+        instructions.push($(el).text().replace(/\s+/g, " ").trim());
+      });
 
     // time.prep = $(".tasty-recipes-prep-time").text();
     // time.cook = $(".tasty-recipes-cook-time").text();
