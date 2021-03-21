@@ -45,6 +45,7 @@ const domains = {
   superiorfarms: require("../scrapers/SuperiorFarmsScraper"),
   tastesbetterfromscratch: require("../scrapers/TastesBetterFromScratchScraper"),
   tasteofhome: require("../scrapers/TasteOfHomeScraper"),
+  thatlowcarblife: require("../scrapers/ThatLowCarbLifeScraper"),
   theblackpeppercorn: require("../scrapers/TheBlackPeppercornScraper"),
   thecafesucrefarine: require("../scrapers/TheCafeSucrefarineScraper"),
   thekitchn: require("../scrapers/TheKitchnScaper"),
