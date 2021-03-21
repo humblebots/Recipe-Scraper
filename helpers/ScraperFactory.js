@@ -40,6 +40,7 @@ const domains = {
   recipetineats: require("../scrapers/RecipeTinEatsScraper"),
   robyn: require("../scrapers/RobynRecipesScraper"),
   seriouseats: require("../scrapers/SeriousEatsScraper"),
+  sallysbakingaddiction: require("../scrapers/SallysBakingAddictionScraper"),
   simplyrecipes: require("../scrapers/SimplyRecipesScraper"),
   smittenkitchen: require("../scrapers/SmittenKitchenScraper"),
   superiorfarms: require("../scrapers/SuperiorFarmsScraper"),
