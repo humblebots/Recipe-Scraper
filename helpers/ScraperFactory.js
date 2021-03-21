@@ -11,6 +11,7 @@ const domains = {
   bbcgoodfood: require("../scrapers/BbcGoodFoodScraper"),
   bonappetit: require("../scrapers/BonAppetitScraper"),
   budgetbytes: require("../scrapers/BudgetBytesScraper"),
+  cafedelites: require("../scrapers/CafeDelitesScraper"),
   centraltexasfoodbank: require("../scrapers/CentralTexasFoodBankScraper"),
   closetcooking: require("../scrapers/ClosetCookingScraper"),
   cookieandkate: require("../scrapers/CookieAndKateScraper"),
