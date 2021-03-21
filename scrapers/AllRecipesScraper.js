@@ -1,10 +1,21 @@
 "use strict";
 
 const BaseScraper = require("../helpers/BaseScraper");
+const { Headers } = require("node-fetch");
 
-class AmbitiousKitchenScraper extends BaseScraper {
+const options = {
+  headers: new Headers({
+    // "User-Agent": "Safari",
+    // Accept: "*/*",
+    // "Accept-Encoding": "gzip, deflate, br",
+    Host: "www.allrecipes.com",
+    "Cache-Control": "no-cache",
+  }),
+};
+
+class AllRecipesScraper extends BaseScraper {
   constructor(url) {
-    super(url, "allrecipes.com/recipe");
+    super(url, "allrecipes.com/", options);
   }
 
   newScrape($) {
@@ -90,4 +101,4 @@ class AmbitiousKitchenScraper extends BaseScraper {
   }
 }
 
-module.exports = AmbitiousKitchenScraper;
+module.exports = AllRecipesScraper;
