@@ -16,11 +16,13 @@ class TheSpruceEatsScraper extends BaseScraper {
     const { ingredients, instructions, tags, time } = this.recipe;
     this.recipe.name = $(".heading__title").text();
 
-    $(".simple-list__item").each((i, el) => {
-      ingredients.push(this.textTrim($(el)));
-    });
+    $("section[class*=ingredients]")
+      .find("li")
+      .each((i, el) => {
+        ingredients.push(this.textTrim($(el)));
+      });
 
-    $(".section--instructions")
+    $("section[class*=instructions]")
       .find("li")
       .find("p.comp")
       .each((i, el) => {
@@ -28,15 +30,11 @@ class TheSpruceEatsScraper extends BaseScraper {
       });
 
     $(".recipe-search-suggestions__chip").each((i, el) => {
-      tags.push(
-        $(el)
-          .find("a")
-          .text()
-      );
+      tags.push($(el).find("a").text());
     });
 
     let metaText = $(".meta-text").each((i, el) => {
-      let text = $(el).text();
+      let text = $(el).text().replace(/\s\s+/g, " ").trim();
       if (text.includes("Prep:")) {
         time.prep = text.replace("Prep: ", "").trim();
       } else if (text.includes("Cook: ")) {
