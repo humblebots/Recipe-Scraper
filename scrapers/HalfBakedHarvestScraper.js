@@ -78,8 +78,6 @@ class HalfBakedHarvestScraper extends BaseScraper {
         servingElements.push($(el).text().trim());
       });
     this.recipe.servings = servingElements.join(" ");
-
-    console.log(JSON.stringify(this.recipe, null, 2));
   }
 }
 
