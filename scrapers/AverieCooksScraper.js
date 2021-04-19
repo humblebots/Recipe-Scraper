@@ -7,23 +7,15 @@ class AverieCooksScraper extends BaseScraper {
     super(url, "averiecooks.com/");
   }
 
-  scrape($) {
+  oldScrape($) {
     this.defaultSetImage($);
     const { ingredients, instructions, time } = this.recipe;
-    this.recipe.name = $(".innerrecipe")
-      .children("h2")
-      .first()
-      .text();
+    this.recipe.name = $(".innerrecipe").children("h2").first().text();
 
     $(".cookbook-ingredients-list")
       .children("li")
       .each((i, el) => {
-        ingredients.push(
-          $(el)
-            .text()
-            .trim()
-            .replace(/\s\s+/g, " ")
-        );
+        ingredients.push($(el).text().trim().replace(/\s\s+/g, " "));
       });
 
     $(".instructions")
@@ -60,6 +52,49 @@ class AverieCooksScraper extends BaseScraper {
             break;
         }
       });
+  }
+
+  newScrape($) {
+    this.defaultSetImage($);
+    const { ingredients, instructions, time } = this.recipe;
+
+    this.recipe.name = $(".mv-create-title-primary")
+      .text()
+      .trim()
+      .replace(/\s\s+/g, "");
+
+    $("div.mv-create-ingredients ul li").each((i, el) => {
+      ingredients.push(this.textTrim($(el)));
+    });
+
+    $("div.mv-create-instructions ol li").each((i, el) => {
+      instructions.push(this.textTrim($(el)));
+    });
+
+    time.prep = this.textTrim($(".mv-create-time-prep .mv-create-time-format"));
+    time.cook = this.textTrim(
+      $(".mv-create-time-active .mv-create-time-format")
+    );
+    time.inactive = this.textTrim(
+      $(".mv-create-time-additional .mv-create-time-format")
+    );
+    time.total = this.textTrim(
+      $(".mv-create-time-total .mv-create-time-format")
+    );
+    this.recipe.servings = $("span.mv-create-yield")
+      .text()
+      .replace("Yield:", "")
+      .trim();
+  }
+
+  scrape($) {
+    this.recipe.name = $(".innerrecipe").children("h2").first().text();
+
+    if (this.recipe.name) {
+      this.oldScrape($);
+    } else {
+      this.newScrape($);
+    }
   }
 }
 
