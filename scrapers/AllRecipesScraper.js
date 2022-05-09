@@ -19,6 +19,7 @@ class AllRecipesScraper extends BaseScraper {
   }
 
   newScrape($) {
+    this.defaultSetDescription($);
     this.recipe.name = this.recipe.name.replace(/\s\s+/g, "");
     const { ingredients, instructions, time } = this.recipe;
     $(".recipe-meta-item").each((i, el) => {
@@ -44,7 +45,7 @@ class AllRecipesScraper extends BaseScraper {
           time.inactive = value;
           break;
         case "Servings":
-          this.recipe.servings = value;
+          this.recipe.servings = value.replace(/\n/g, " ").trim();
           break;
         default:
           break;
@@ -52,10 +53,7 @@ class AllRecipesScraper extends BaseScraper {
     });
 
     $(".ingredients-item").each((i, el) => {
-      const ingredient = $(el)
-        .text()
-        .replace(/\s\s+/g, " ")
-        .trim();
+      const ingredient = $(el).text().replace(/\s\s+/g, " ").trim();
       ingredients.push(ingredient);
     });
 
@@ -66,20 +64,17 @@ class AllRecipesScraper extends BaseScraper {
   }
 
   oldScrape($) {
+    this.defaultSetDescription($);
     const { ingredients, instructions, time } = this.recipe;
     $("#polaris-app label").each((i, el) => {
-      const item = $(el)
-        .text()
-        .replace(/\s\s+/g, "");
+      const item = $(el).text().replace(/\s\s+/g, "");
       if (item !== "Add all ingredients to list" && item !== "") {
         ingredients.push(item);
       }
     });
 
     $(".step").each((i, el) => {
-      const step = $(el)
-        .text()
-        .replace(/\s\s+/g, "");
+      const step = $(el).text().replace(/\s\s+/g, "");
       if (step !== "") {
         instructions.push(step);
       }
@@ -87,7 +82,10 @@ class AllRecipesScraper extends BaseScraper {
     time.prep = $("time[itemprop=prepTime]").text();
     time.cook = $("time[itemprop=cookTime]").text();
     time.ready = $("time[itemprop=totalTime]").text();
-    this.recipe.servings = $("#metaRecipeServings").attr("content");
+    this.recipe.servings = $("#metaRecipeServings")
+      .attr("content")
+      .replace(/\n/g, " ")
+      .trim();
   }
 
   scrape($) {

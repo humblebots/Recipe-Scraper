@@ -13,55 +13,48 @@ class SimplyRecipesScraper extends BaseScraper {
 
   scrape($) {
     this.defaultSetImage($);
+    this.defaultSetDescription($);
     const { ingredients, instructions, time } = this.recipe;
-    this.recipe.name = $("h2.recipe-block__header")
-      .text()
-      .replace(/\s\s+/g, " ")
-      .trim();
+    this.recipe.name = $("#recipe-block__header_1-0").text();
 
-    $(".ingredient-list")
-      .find("li.ingredient")
-      .each((i, el) => {
-        ingredients.push(
-          $(el)
-            .clone()
-            .children()
-            .remove()
-            .end()
-            .text()
-            .replace(/\s\s+/g, " ")
-            .trim()
-        );
-      });
+    $("li.ingredient").each((i, el) => {
+      ingredients.push(this.textTrim($(el)));
+    });
 
-    $("section.section--instructions")
+    $("#structured-project__steps_1-0")
       .find("p")
       .each((i, el) => {
-        let curEl = $(el).text();
-        if (curEl) {
-          instructions.push(curEl.replace(/^\d+\s/, "").trim());
-        }
+        instructions.push($(el).text().trim());
       });
 
-    time.prep = $("div.prep-time span span.meta-text__data")
-      .text()
-      .replace(/\s+/g, " ")
-      .trim();
+    time.prep = this.textTrim($(".prep-time .meta-text__data")).replace(
+      "\n",
+      " "
+    );
 
-    time.cook = $("div.cook-time span span.meta-text__data")
-      .text()
-      .replace(/\s+/g, " ")
-      .trim();
+    time.active = this.textTrim($(".active-time .meta-text__data")).replace(
+      "\n",
+      " "
+    );
 
-    time.total = $("div.total-time span span.meta-text__data")
-      .text()
-      .replace(/\s+/g, " ")
-      .trim();
+    time.inactive = this.textTrim($(".custom-time .meta-text__data")).replace(
+      "\n",
+      " "
+    );
 
-    this.recipe.servings = $("div.recipe-serving span span.meta-text__data")
-      .text()
-      .replace(/\s+/g, " ")
-      .trim();
+    time.cook = this.textTrim($(".cook-time .meta-text__data")).replace(
+      "\n",
+      " "
+    );
+
+    time.total = this.textTrim($(".total-time .meta-text__data")).replace(
+      "\n",
+      " "
+    );
+
+    this.recipe.servings = this.textTrim(
+      $(".recipe-serving .meta-text__data")
+    ).replace("\n", " ");
   }
 }
 

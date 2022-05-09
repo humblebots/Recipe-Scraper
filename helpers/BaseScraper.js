@@ -2,7 +2,7 @@
 
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
-const { validate } = require("jsonschema");
+const {validate} = require("jsonschema");
 
 const Recipe = require("./Recipe");
 const recipeSchema = require("./RecipeSchema.json");
@@ -15,6 +15,17 @@ class BaseScraper {
     this.url = url;
     this.subUrl = subUrl;
     this.fetchOptions = fetchOptions;
+  }
+
+  async checkServerResponse() {
+    try {
+      const res = await fetch(this.url);
+
+      return res.ok; // res.status >= 200 && res.status < 300
+    } catch (e) {
+      console.log(e)
+      return false;
+    }
   }
 
   /**
@@ -50,6 +61,19 @@ class BaseScraper {
 
   defaultSetTitle($) {
     this.recipe.name = $("meta[property='og:title']").attr("content");
+  }
+
+  /**
+   * @param {object} $ - a cheerio object representing a DOM
+   * if found, set recipe description
+   */
+  defaultSetDescription($) {
+    const description =
+      $("meta[name='description']").attr("content") ||
+      $("meta[property='og:description']").attr("content") ||
+      $("meta[name='twitter:description']").attr("content");
+
+    this.recipe.description = description ? description.replace(/\n/g, " ").trim() : '';
   }
 
   /**
@@ -101,6 +125,15 @@ class BaseScraper {
       this.defaultError();
     }
     return this.recipe;
+  }
+
+  static parsePTTime(ptTime) {
+    ptTime = ptTime.replace('PT', '');
+    ptTime = ptTime.replace('H', ' hours');
+    ptTime = ptTime.replace('M', ' minutes');
+    ptTime = ptTime.replace('S', ' seconds');
+
+    return ptTime;
   }
 }
 

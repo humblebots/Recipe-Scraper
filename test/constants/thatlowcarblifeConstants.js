@@ -5,6 +5,8 @@ module.exports = {
   nonRecipeUrl: "https://thatlowcarblife.com/about/",
   expectedRecipe: {
     name: "Chicken Bacon Ranch Pizza",
+    description:
+      "This CHICKEN BACON RANCH PIZZA starts out with my favorite crust - fathead dough! It gets topped off with some ranch dressing, cheddar cheese, juicy chicken, and plenty of crispy bacon pieces. Hard to go",
     ingredients: [
       "2 cups shredded mozzarella",
       "¾ cup almond flour",
