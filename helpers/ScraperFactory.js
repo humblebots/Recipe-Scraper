@@ -76,8 +76,7 @@ class ScraperFactory {
       if (domains[domain] !== undefined) {
         return new domains[domain](url);
       } else {
-        console.log(`Site not yet supported. Site's domain was: ${domain}`);
-        throw new Error("Site not yet supported");
+        throw new Error(`Site not yet supported. Site's domain was: ${domain}`);
       }
     } else {
       throw new Error("Failed to parse domain");
