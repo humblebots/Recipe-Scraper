@@ -15,6 +15,7 @@ const domains = {
   centraltexasfoodbank: require("../scrapers/CentralTexasFoodBankScraper"),
   closetcooking: require("../scrapers/ClosetCookingScraper"),
   cookieandkate: require("../scrapers/CookieAndKateScraper"),
+  cookingclassy: require("../scrapers/CookingClassyScraper"),
   copykat: require("../scrapers/CopyKatScraper"),
   damndelicious: require("../scrapers/DamnDeliciousScraper"),
   eatingwell: require("../scrapers/EatingWellScraper"),

@@ -1,0 +1,47 @@
+module.exports = {
+  testUrl: "https://www.cookingclassy.com/flan-recipe/",
+  invalidUrl: "https://www.cookingclassy.com/recipe/notarealurl",
+  invalidDomainUrl: "www.invalid.com",
+  nonRecipeUrl: "https://www.cookingclassy.com/about/",
+  expectedRecipe: {
+    name: "Flan",
+    description:
+      "My favorite Flan recipe! You get a rich and creamy custard style dessert covered with a deeply flavorful caramel sauce. And this version also includes luscious cream cheese to really take it over the top!",
+    ingredients: [
+      "3/4 cup (150g) granulated sugar",
+      "1/4 cup + 1 Tbsp warm water",
+      "1 (8 oz) pkg. cream cheese, well softened (see notes)",
+      "2 Tbsp granulated sugar",
+      "4 large eggs",
+      "1 (14 oz) can sweetened condensed milk",
+      "1 (12 oz) can evaporated milk",
+      "2 tsp vanilla extract",
+    ],
+    instructions: [
+      "Bring plenty of water to a boil in a pot or kettle to use as a water bath (the flan will be baked in a dish set in a roasting pan surrounded by the boiling water). Preheat oven to 350 degrees.",
+      "For the caramel topping: have an ungreased 9-inch by 2-inch cake pan ready or a 2-quart round baking dish or souffle pan.",
+      "In a medium saucepan whisk together 3/4 cup granulated sugar and 1/4 cup water. Set over medium heat, cook stirring constantly until sugar has dissolved and mixture begins to boil.",
+      "Once boiling stop stirring and let cook until it's nearing just an amber color. Remove from heat, let rest 5 seconds then add remaining 1 Tbsp warm water (it will steam and sputter slightly so stand back!), whisk to blend.",
+      "Immediately pour caramelized sugar into cake pan or 2-quart baking dish and carefully tilt in a circular motion to coat the entire surface of bottom of the pan (careful pan will be hot!). Set aside.",
+      "For the flan custard mixture: in a large mixing bowl using an electric hand mixer blend together cream cheese and 2 Tbsp sugar just until smooth.",
+      "Mix in eggs one at a time, mixing until just combined after each addition. Then mix in sweetened condensed milk, evaporated milk and vanilla extract.",
+      "Pour milk mixture over caramel layer in cake pan. Set pan in a roasting pan large enough to fit with extra space surrounding. Pour in enough boiling water to reach about halfway up the sides of the cake pan.",
+      "Bake until nearly set (it should still wiggle just slightly when jiggled), about 50 - 60 minutes.**",
+      "Carefully remove from water bath (roasting pan with water) and set on wire rack to cool for 1 hour. Transfer to fridge and let chill 4 hours.",
+      "Run a sharp knife around the flan right up next to the pan, then place a large rimmed serving plate over the pan. While holding the plate in place, flip the flan to the opposite side and let it fall onto the plate.",
+      "Slice and serve. Store in refrigerator.",
+    ],
+    tags: [],
+    time: {
+      prep: "20 minutes",
+      cook: "1 hour",
+      active: "",
+      inactive: "",
+      ready: "",
+      total: "1 hour 20 minutes",
+    },
+    servings: "8",
+    image:
+      "https://www.cookingclassy.com/wp-content/uploads/2020/09/flan-6.jpg",
+  },
+};
