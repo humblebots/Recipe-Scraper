@@ -32,6 +32,7 @@ const domains = {
   julieblanner: require("../scrapers/JulieBlannerScraper"),
   kitchenstories: require("../scrapers/KitchenStoriesScraper"),
   kingarthurbaking: require("../scrapers/KingArthurBakingScraper"),
+  liquor: require("../scrapers/liquorScraper"),
   loveandlemons: require("../scrapers/LoveAndLemonsScaper"),
   marthastewart: require("../scrapers/MarthaStewartScraper"),
   makingthymeforhealth: require("../scrapers/MakingThymeForHealthScraper"),
