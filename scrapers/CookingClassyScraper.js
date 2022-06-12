@@ -16,7 +16,6 @@ const options = {
 
 class CookingClassyScraper extends BaseScraper {
   constructor(url) {
-    console.log("init cooking classy");
     super(url, "cookingclassy.com/", options);
   }
 

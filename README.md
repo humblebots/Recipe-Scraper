@@ -1,5 +1,7 @@
 # recipe-scraper
 
+Schema: https://schema.org/Recipe
+
 **A NodeJS package for scraping recipes from the web.**
 
 [![Build Status](https://travis-ci.org/jadkins89/Recipe-Scraper.svg?branch=master)](https://travis-ci.org/jadkins89/Recipe-Scraper)
@@ -108,7 +110,7 @@ Depending on the recipe, certain fields may be left blank. All fields are repres
 If the url provided is invalid and a domain is unable to be parsed, an error message will be returned.
 
 ```javascript
-recipeScraper("keyboard kitty").catch(error => {
+recipeScraper("keyboard kitty").catch((error) => {
   console.log(error.message);
   // => "Failed to parse domain"
 });
@@ -117,7 +119,7 @@ recipeScraper("keyboard kitty").catch(error => {
 If the url provided doesn't match a supported domain, an error message will be returned.
 
 ```javascript
-recipeScraper("some.invalid.url").catch(error => {
+recipeScraper("some.invalid.url").catch((error) => {
   console.log(error.message);
   // => "Site not yet supported"
 });
@@ -126,7 +128,7 @@ recipeScraper("some.invalid.url").catch(error => {
 If a recipe is not found on a supported domain site, an error message will be returned.
 
 ```javascript
-recipeScraper("some.no.recipe.url").catch(error => {
+recipeScraper("some.no.recipe.url").catch((error) => {
   console.log(error.message);
   // => "No recipe found on page"
 });
@@ -135,7 +137,7 @@ recipeScraper("some.no.recipe.url").catch(error => {
 If a page does not exist or some other 400+ error occurs when fetching, an error message will be returned.
 
 ```javascript
-recipeScraper("some.nonexistent.page").catch(error => {
+recipeScraper("some.nonexistent.page").catch((error) => {
   console.log(error.message);
   // => "No recipe found on page"
 });
@@ -144,7 +146,7 @@ recipeScraper("some.nonexistent.page").catch(error => {
 If a supported url does not contain the proper sub-url to be a valid recipe, an error message will be returned including the sub-url required.
 
 ```javascript
-recipeScraper("some.improper.url").catch(error => {
+recipeScraper("some.improper.url").catch((error) => {
   console.log(error.message);
   // => "url provided must include '#subUrl'"
 });

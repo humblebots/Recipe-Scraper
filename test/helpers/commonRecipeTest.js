@@ -1,4 +1,4 @@
-const {assert, expect} = require("chai");
+const { assert, expect } = require("chai");
 const ScraperFactory = require("../../helpers/ScraperFactory");
 
 const commonRecipeTest = (name, constants, url) => {
@@ -14,13 +14,12 @@ const commonRecipeTest = (name, constants, url) => {
       let isServiceAvailable = await scraper.checkServerResponse();
 
       if (!isServiceAvailable) {
-        console.log('SKIP TEST, server not responding', isServiceAvailable)
+        console.log("SKIP TEST, server not responding", isServiceAvailable);
         expect(true);
       } else {
         let actualRecipe = await scraper.fetchRecipe();
         expect(constants.expectedRecipe).to.deep.equal(actualRecipe);
       }
-
     });
 
     it("should throw an error if a problem occurred during page retrieval", async () => {

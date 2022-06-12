@@ -46,7 +46,7 @@ const domains = {
   robyn: require("../scrapers/RobynRecipesScraper"),
   seriouseats: require("../scrapers/SeriousEatsScraper"),
   sallysbakingaddiction: require("../scrapers/SallysBakingAddictionScraper"),
-  simplyrecipes: require("../scrapers/SimplyRecipesScraper"),
+  // simplyrecipes: require("../scrapers/SimplyRecipesScraper"),
   smittenkitchen: require("../scrapers/SmittenKitchenScraper"),
   superiorfarms: require("../scrapers/SuperiorFarmsScraper"),
   tastesbetterfromscratch: require("../scrapers/TastesBetterFromScratchScraper"),
@@ -77,7 +77,18 @@ class ScraperFactory {
       if (domains[domain] !== undefined) {
         return new domains[domain](url);
       } else {
-        throw new Error(`Site not yet supported. Site's domain was: ${domain}`);
+        // Try the generic parser. If that throws, re-throw the error that will be
+        // used down the line to use the 3rd tier general parser.
+        try {
+          const GenericScraper = require("../scrapers/genericScraper");
+          return new GenericScraper(url);
+        } catch (error) {
+          console.error(error);
+
+          throw new Error(
+            `Site not yet supported. Site's domain was: ${domain}`
+          );
+        }
       }
     } else {
       throw new Error("Failed to parse domain");

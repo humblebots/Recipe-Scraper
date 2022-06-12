@@ -33,14 +33,18 @@
   "homepage": "https://github.com/jadkins89/Recipe-Scraper#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.11",
+    "fs": "^0.0.1-security",
     "jsonschema": "^1.4.0",
     "node-fetch": "^2.6.1",
     "parse-domain": "^2.3.2",
-    "puppeteer": "^9.0.0"
+    "path": "^0.12.7",
+    "puppeteer": "^9.0.0",
+    "tinyduration": "^3.2.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "coveralls": "^3.0.6",
+    "it-each": "^0.4.0",
     "mocha": "^6.2.1",
     "nyc": "^14.1.1"
   }

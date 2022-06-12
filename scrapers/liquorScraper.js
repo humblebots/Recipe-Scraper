@@ -3,10 +3,10 @@
 const BaseScraper = require("../helpers/BaseScraper");
 
 /**
- * Class for scraping loveandlemons.com
+ * Class for scraping liquor.com
  * @extends BaseScraper
  */
-class LoveAndLemonsScraper extends BaseScraper {
+class LiquorScraper extends BaseScraper {
   constructor(url) {
     super(url, "liquor.com/");
   }
@@ -42,4 +42,4 @@ class LoveAndLemonsScraper extends BaseScraper {
   }
 }
 
-module.exports = LoveAndLemonsScraper;
+module.exports = LiquorScraper;
