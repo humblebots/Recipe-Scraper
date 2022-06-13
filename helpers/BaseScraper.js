@@ -74,7 +74,7 @@ class BaseScraper {
 
   defaultSetTitle($) {
     this.recipe.name =
-      this.metadataJson?.name ?? $("meta[property='og:title']").attr("content");
+      this.metadataJson?.name || $("meta[property='og:title']").attr("content");
   }
 
   defaultSetTags($) {
@@ -116,9 +116,9 @@ class BaseScraper {
    */
   defaultSetDescription($) {
     const description =
-      this.metadataJson?.description ??
-      $("meta[name='description']").attr("content") ??
-      $("meta[property='og:description']").attr("content") ??
+      this.metadataJson?.description ||
+      $("meta[name='description']").attr("content") ||
+      $("meta[property='og:description']").attr("content") ||
       $("meta[name='twitter:description']").attr("content");
 
     this.recipe.description = description
@@ -373,7 +373,7 @@ class BaseScraper {
 
       const processInstructionsArray = (instructionsArray) => {
         return instructionsArray.map((instruction) => {
-          const text = instruction?.text ?? instruction?.itemListElement?.text;
+          const text = instruction?.text || instruction?.itemListElement?.text;
 
           if (text) {
             return text;
@@ -383,7 +383,7 @@ class BaseScraper {
           ) {
             const el = instruction.itemListElement[0];
 
-            return el?.text ?? el?.name ?? instruction;
+            return el?.text || el?.name || instruction;
           } else {
             return instruction;
           }

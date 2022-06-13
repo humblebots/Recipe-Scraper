@@ -60,12 +60,19 @@ const testUrls = [
   // "https://www.theblackpeppercorn.com/how-to-cook-a-smoked-picnic-ham",
   // "https://thecafesucrefarine.com/best-ever-homemade-flour-tortillas/",
   // "https://www.thepioneerwoman.com/food-cooking/recipes/a86873/french-dip-sandwiches/",
-  // "https://therealfoodrds.com/veggie-loaded-turkey-chili/",
+  "https://therealfoodrds.com/veggie-loaded-turkey-chili/",
   // "https://therecipecritic.com/creamy-parmesan-spaghetti/",
   // "https://thereislifeafterwheat.com/2014/10/sandwich-bread-2/?fbclid=iwar20kih966lajfk5onocbmu1lga1tziwjmnrqjuqkux-axe8_ixc63fqchg",
   // "https://www.thespruceeats.com/grilled-squid-recipe-1808848",
   // "https://whatsgabycooking.com/cauliflower-rice-kale-bowls-instant-pot-black-beans/",
   // "https://www.woolworths.com.au/shop/recipedetail/7440/bean-tomato-nachos",
+
+  //++++++ broken
+  // "https://tasty.co/article/christinebyrne/pizza-tots-are-literally-everything",
+  // "https://thatsdeelicious.com/green-enchiladas-with-chicken/",
+  // "https://www.pauladeen.com/recipe/lemon-blossoms/",
+  // "https://www.thekitchn.com/how-to-make-chimichurri-sauce-242335",
+  //++++++ broken
 
   // "https://www.yummly.com/recipe/No-Bake-Lemon-Mango-Cheesecakes-with-Speculoos-crust-781945",
   // "https://www.campbells.com/recipes/shortcut-stroganoff/",
@@ -77,12 +84,13 @@ const testUrls = [
   // "https://handletheheat.com/peanut-butter-stuffed-brownies/",
   // "https://hungry-blonde.com/low-carb-beef-black-bean-enchiladas/",
   // "https://natashaskitchen.com/raspberry-macarons-recipe-video-tutorial/",
-  // "https://tasty.co/article/christinebyrne/pizza-tots-are-literally-everything",
-  // "https://thatsdeelicious.com/green-enchiladas-with-chicken/",
-  // "https://www.pauladeen.com/recipe/lemon-blossoms/",
-  "https://thecozycook.com/chicken-and-dumplings/",
-  "https://www.asweetpeachef.com/slow-cooker-shredded-chicken/",
-  "https://www.cookingclassy.com/flan-recipe/",
+  // "https://thecozycook.com/chicken-and-dumplings/",
+  // "https://www.asweetpeachef.com/slow-cooker-shredded-chicken/",
+  // "https://www.cookingclassy.com/flan-recipe/",
+  // "https://thrivinghomeblog.com/cilantro-lime-chicken-marinade/",
+  // "https://preppykitchen.com/strawberry-cake/",
+  // "https://www.foxandbriar.com/40-minute-hamburger-bun-recipe/",
+  // "https://www.skinnytaste.com/cheesecake-brownies/",
 ];
 
 describe("generic parser", () => {
@@ -97,6 +105,8 @@ describe("generic parser", () => {
       if (!isServiceAvailable) {
         console.log("SKIP TEST, server not responding", isServiceAvailable);
         expect(true);
+
+        return next();
       }
 
       try {
