@@ -12,7 +12,7 @@ class GenericScraper extends BaseScraper {
   }
 
   // Overriding to prevent super class from throwing.
-  checkUrl() {}
+  checkUrl() { }
   validateRecipe() {
     return this.recipe;
   }
@@ -33,9 +33,8 @@ class GenericScraper extends BaseScraper {
         throw new Error("generic parser missed name");
       }
 
-      if (!this.recipe.description) {
-        throw new Error("generic parser missed description");
-      }
+      // description is optional.
+
 
       if (!this.recipe.image) {
         throw new Error("generic parser missed image");

@@ -59,7 +59,9 @@ class BaseScraper {
     this.recipe.image =
       $("meta[property='og:image']").attr("content") ||
       $("meta[name='og:image']").attr("content") ||
-      $("meta[itemprop='image']").attr("content");
+      $("meta[itemprop='image']").attr("content") ||
+      $("meta[name='twitter:image']").attr("content") ||
+      $("meta[property='twitter:image']").attr("content");
 
     if (!this.recipe.image && this.metadataJson) {
       const image = this.metadataJson.image;
@@ -70,11 +72,69 @@ class BaseScraper {
         this.recipe.image = image;
       }
     }
+
+    if (!this.recipe.image) {
+      // If no image found in metadata, try to find the most prevalent image element on screen
+      // We'll look for the <img> tag that is most visible and largest, or the first large image in the main content
+      let maxArea = 0;
+      let selectedImg = null;
+
+      $("img").each((i, el) => {
+        const $img = $(el);
+        // Try to get width/height from attributes or style
+        let width = parseInt($img.attr("width")) || 0;
+        let height = parseInt($img.attr("height")) || 0;
+
+        // If not set, try to get from style attribute
+        if ((!width || !height) && $img.attr("style")) {
+          const style = $img.attr("style");
+          const widthMatch = style.match(/width\s*:\s*(\d+)px/);
+          const heightMatch = style.match(/height\s*:\s*(\d+)px/);
+          if (widthMatch) width = parseInt(widthMatch[1]);
+          if (heightMatch) height = parseInt(heightMatch[1]);
+        }
+
+        // If still not set, skip area calculation, but still consider as fallback
+        let area = width && height ? width * height : 0;
+
+        // Prefer images in main content area
+        let inMain = false;
+        let parent = $img.parent();
+        for (let j = 0; j < 4 && parent.length; j++) {
+          const classAttr = parent.attr("class") || "";
+          if (
+            /main|content|entry|post|recipe/i.test(classAttr) ||
+            ["main", "article"].includes(parent.prop("tagName") && parent.prop("tagName").toLowerCase())
+          ) {
+            inMain = true;
+            break;
+          }
+          parent = parent.parent();
+        }
+
+        // Heuristic: prefer images in main content, with largest area, and not likely to be logo or icon
+        const src = $img.attr("src") || "";
+        if (
+          src &&
+          !/logo|icon|sprite|blank|spacer|avatar|profile|thumb|svg/i.test(src) &&
+          (inMain || area > 10000)
+        ) {
+          if (area > maxArea || (inMain && !selectedImg)) {
+            maxArea = area;
+            selectedImg = src;
+          }
+        }
+      });
+
+      if (!this.recipe.image && selectedImg) {
+        this.recipe.image = selectedImg;
+      }
+    }
   }
 
   defaultSetTitle($) {
     this.recipe.name =
-      this.metadataJson?.name || $("meta[property='og:title']").attr("content");
+      this.metadataJson?.name || $("meta[property='og:title']").attr("content") || $("title").text();
   }
 
   defaultSetTags($) {
@@ -597,6 +657,62 @@ class BaseScraper {
     });
 
     if (instructions.length > 0) {
+      return;
+    }
+
+    // Look for any heading h1...h7 with the text "Instructions" or "steps". 
+    // Find a nearby ol or ul element and enumerate the list elements and push them to the `instructions` list
+
+    // Find all headings h1-h7
+    $("h1, h2, h3, h4, h5, h6").each((i, el) => {
+      const headingText = $(el).text().trim().toLowerCase();
+      console.log(`[BaseScraper] Checking heading: "${headingText}"`);
+      if (headingText === "instructions" || headingText === "steps" || headingText === "instructions:" || headingText === "steps:") {
+        console.log("[BaseScraper] Found instructions heading, looking for list...");
+        // Try to find the next sibling ol or ul
+        let $next = $(el).next();
+        // Traverse until we find an ol or ul, or stop after a few steps to avoid infinite loops
+        let steps = 0;
+        while ($next.length && steps < 5) {
+          console.log(`[BaseScraper] Step ${steps}: Checking sibling tag <${$next.prop("tagName") && $next.prop("tagName").toLowerCase()}>`);
+          if ($next.is("ul, ol")) {
+            console.log("[BaseScraper] Found instructions list as next sibling.");
+            $next.children("li").each((j, li) => {
+              const item = this.newTrimText($(li));
+              console.log(`[BaseScraper] Adding instruction from list: "${item}"`);
+              instructions.push(item);
+            });
+            // If we found and processed a list, break out of the loop
+            return false; // break out of .each
+          }
+          // If not, move to the next sibling
+          $next = $next.next();
+          steps++;
+        }
+        // If not found as a next sibling, try to find a ul/ol within the same parent after the heading
+        if (!instructions.length) {
+          console.log("[BaseScraper] No list found as next sibling, searching within parent...");
+          const $parent = $(el).parent();
+          let found = false;
+          $parent.children().each((k, child) => {
+            if (found) return;
+            if (child === el) {
+              found = true; // Start looking after the heading
+            } else if (found && $(child).is("ul, ol")) {
+              console.log("[BaseScraper] Found instructions list within parent after heading.");
+              $(child).children("li").each((j, li) => {
+                const item = this.newTrimText($(li));
+                console.log(`[BaseScraper] Adding instruction from parent list: "${item}"`);
+                instructions.push(item);
+              });
+              return false; // break out of .each
+            }
+          });
+        }
+      }
+    });
+
+    if (instructions.length) {
       return;
     }
   }
