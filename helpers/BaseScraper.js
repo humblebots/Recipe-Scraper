@@ -363,6 +363,62 @@ class BaseScraper {
     if (ingredients.length) {
       return;
     }
+
+    // Look for any heading h1...h7 with the text "Ingredients" or "ingredients". 
+    // Find a nearby ol or ul element and enumerate the list elements and push them to the `ingredients` list
+
+    // Find all headings h1-h7
+    $("h1, h2, h3, h4, h5, h6").each((i, el) => {
+      const headingText = $(el).text().trim().toLowerCase();
+      console.log(`[BaseScraper] Checking heading: "${headingText}"`);
+      if (headingText === "ingredients" || headingText === "ingredients:") {
+        console.log("[BaseScraper] Found ingredients heading, looking for list...");
+        // Try to find the next sibling ol or ul
+        let $next = $(el).next();
+        // Traverse until we find an ol or ul, or stop after a few steps to avoid infinite loops
+        let steps = 0;
+        while ($next.length && steps < 5) {
+          console.log(`[BaseScraper] Step ${steps}: Checking sibling tag <${$next.prop("tagName") && $next.prop("tagName").toLowerCase()}>`);
+          if ($next.is("ul, ol")) {
+            console.log("[BaseScraper] Found ingredients list as next sibling.");
+            $next.children("li").each((j, li) => {
+              const item = this.newTrimText($(li));
+              console.log(`[BaseScraper] Adding ingredient from list: "${item}"`);
+              ingredients.push(item);
+            });
+            // If we found and processed a list, break out of the loop
+            return false; // break out of .each
+          }
+          // If not, move to the next sibling
+          $next = $next.next();
+          steps++;
+        }
+        // If not found as a next sibling, try to find a ul/ol within the same parent after the heading
+        if (!ingredients.length) {
+          console.log("[BaseScraper] No list found as next sibling, searching within parent...");
+          const $parent = $(el).parent();
+          let found = false;
+          $parent.children().each((k, child) => {
+            if (found) return;
+            if (child === el) {
+              found = true; // Start looking after the heading
+            } else if (found && $(child).is("ul, ol")) {
+              console.log("[BaseScraper] Found ingredients list within parent after heading.");
+              $(child).children("li").each((j, li) => {
+                const item = this.newTrimText($(li));
+                console.log(`[BaseScraper] Adding ingredient from parent list: "${item}"`);
+                ingredients.push(item);
+              });
+              return false; // break out of .each
+            }
+          });
+        }
+      }
+    });
+
+    if (ingredients.length) {
+      return;
+    }
   }
 
   defaultSetInstructions($) {
@@ -407,7 +463,7 @@ class BaseScraper {
           parsed("li").each((i, el) => {
             this.recipe.instructions.push(this.newTrimText($(el)));
           });
-        } catch {}
+        } catch { }
       }
     }
 
